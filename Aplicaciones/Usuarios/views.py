@@ -100,7 +100,7 @@ def editar_c(request, id):
         ciudadano = Ciudadano.objects.get(id=id)
     except Ciudadano.DoesNotExist:
         messages.error(request, "Ciudadano no encontrado")
-        return redirect('mis_denuncias')
+        return redirect('usuarios_lista')
     
     return render(request, "editar_c.html", {"ciudadano": ciudadano})
 
@@ -109,7 +109,7 @@ def procesaredicionciudadano(request, id):
         ciudadano = Ciudadano.objects.get(id=id)
     except Ciudadano.DoesNotExist:
         messages.error(request, "Ciudadano no encontrado")
-        return redirect('mis_denuncias')
+        return redirect('usuarios_lista')
 
    # Extraer datos del formulario
     cedula = request.POST.get("cedula")
@@ -127,7 +127,7 @@ def procesaredicionciudadano(request, id):
     ciudadano.save()
 
     messages.success(request, "Ciudadano actualizado exitosamente")
-    return redirect("mis_denuncias")
+    return redirect("usuarios_lista")
 
 
 
