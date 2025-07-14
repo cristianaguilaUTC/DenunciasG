@@ -10,7 +10,7 @@
                 
         </div>
         <div class="card-body">
-            <form method="post">
+            <form method="post" action="/procesaredicionfuncionario/{{funcionario.id}}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
