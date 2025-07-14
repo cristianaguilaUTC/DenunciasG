@@ -100,7 +100,7 @@ def editar_c(request, id):
         ciudadano = Ciudadano.objects.get(id=id)
     except Ciudadano.DoesNotExist:
         messages.error(request, "Ciudadano no encontrado")
-        return redirect('usuarios_lista')
+        return redirect('panel_funcionario')
     
     return render(request, "editar_c.html", {"ciudadano": ciudadano})
 
@@ -109,7 +109,7 @@ def procesaredicionciudadano(request, id):
         ciudadano = Ciudadano.objects.get(id=id)
     except Ciudadano.DoesNotExist:
         messages.error(request, "Ciudadano no encontrado")
-        return redirect('usuarios_lista')
+        return redirect('panel_funcionario')
 
    # Extraer datos del formulario
     cedula = request.POST.get("cedula")
@@ -127,8 +127,44 @@ def procesaredicionciudadano(request, id):
     ciudadano.save()
 
     messages.success(request, "Ciudadano actualizado exitosamente")
-    return redirect("usuarios_lista")
+    return redirect("panel_funcionario")
 
+
+
+
+
+
+def editar_f(request, id):
+    try:
+        funcionario = Funcionario.objects.get(id=id)
+    except Funcionario.DoesNotExist:
+        messages.error(request, "Funcionario no encontrado")
+        return redirect('panel_funcionario')
+    
+    return render(request, "editar_f.html", {"funcionario": funcionario})
+
+def procesaredicionfuncionario(request, id):
+    try:
+        funcionario = Funcionario.objects.get(id=id)
+    except Funcionario.DoesNotExist:
+        messages.error(request, "funcionario no encontrado")
+        return redirect('panel_funcionario')
+
+   # Extraer datos del formulario
+    nombre = request.POST.get("nombre")
+    apellido = request.POST.get("apellido")
+    correo = request.POST.get("correo")
+    contrasena = request.POST.get("contrasena")
+
+   # Actualizar campos
+    funcionario.nombre = nombre
+    funcionario.apellido = apellido
+    funcionario.correo = correo
+    funcionario.contrasena = contrasena
+    funcionario.save()
+
+    messages.success(request, "funcionario actualizado exitosamente")
+    return redirect("panel_funcionario")
 
 
 
