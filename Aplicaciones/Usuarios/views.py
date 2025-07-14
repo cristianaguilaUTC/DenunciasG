@@ -95,39 +95,39 @@ def login_funcionario(request):
 
 
    
-#def editar_ciudadano(request, id):
-#    try:
-#        ciudadano = Ciudadano.objects.get(id=id)
-#    except Ciudadano.DoesNotExist:
-#        messages.error(request, "Ciudadano no encontrado")
-#        return redirect('mis_denuncias')
-#    
-#    return render(request, "editar_ciudadano.html", {"ciudadano": ciudadano})
-#
-#def procesar_edicion_ciudadano(request, id):
-#    try:
-#        ciudadano = Ciudadano.objects.get(id=id)
-#    except Ciudadano.DoesNotExist:
-#        messages.error(request, "Ciudadano no encontrado")
-#        return redirect('mis_denuncias')
-#
-    # Extraer datos del formulario
-#   cedula = request.POST.get("cedula")
-#    nombre = request.POST.get("nombre")
-#    apellido = request.POST.get("apellido")
-#    correo = request.POST.get("correo")
-#    contrasena = request.POST.get("contrasena")
-#
-    # Actualizar campos
-#   ciudadano.cedula = cedula
-#    ciudadano.nombre = nombre
-#    ciudadano.apellido = apellido
-#    ciudadano.correo = correo
-#    ciudadano.contrasena = contrasena
-#    ciudadano.save()
-#
-#    messages.success(request, "Ciudadano actualizado exitosamente")
-#    return redirect("mis_denuncias")
+def editar_c(request, id):
+    try:
+        ciudadano = Ciudadano.objects.get(id=id)
+    except Ciudadano.DoesNotExist:
+        messages.error(request, "Ciudadano no encontrado")
+        return redirect('mis_denuncias')
+    
+    return render(request, "editar_c.html", {"ciudadano": ciudadano})
+
+def procesar_edicion_ciudadano(request, id):
+    try:
+        ciudadano = Ciudadano.objects.get(id=id)
+    except Ciudadano.DoesNotExist:
+        messages.error(request, "Ciudadano no encontrado")
+        return redirect('mis_denuncias')
+
+   # Extraer datos del formulario
+    cedula = request.POST.get("cedula")
+    nombre = request.POST.get("nombre")
+    apellido = request.POST.get("apellido")
+    correo = request.POST.get("correo")
+    contrasena = request.POST.get("contrasena")
+
+   # Actualizar campos
+    ciudadano.cedula = cedula
+    ciudadano.nombre = nombre
+    ciudadano.apellido = apellido
+    ciudadano.correo = correo
+    ciudadano.contrasena = contrasena
+    ciudadano.save()
+
+    messages.success(request, "Ciudadano actualizado exitosamente")
+    return redirect("mis_denuncias")
 
 
 def editar_mi_perfil(request):
