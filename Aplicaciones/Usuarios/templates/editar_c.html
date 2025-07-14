@@ -11,7 +11,7 @@
                 
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" action="/procesaredicionciudadano/{{ciudadano.id}}">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="cedula" class="form-label">Cédula</label>

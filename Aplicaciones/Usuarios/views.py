@@ -104,7 +104,7 @@ def editar_c(request, id):
     
     return render(request, "editar_c.html", {"ciudadano": ciudadano})
 
-def procesar_edicion_ciudadano(request, id):
+def procesaredicionciudadano(request, id):
     try:
         ciudadano = Ciudadano.objects.get(id=id)
     except Ciudadano.DoesNotExist:
@@ -128,6 +128,8 @@ def procesar_edicion_ciudadano(request, id):
 
     messages.success(request, "Ciudadano actualizado exitosamente")
     return redirect("mis_denuncias")
+
+
 
 
 def editar_mi_perfil(request):

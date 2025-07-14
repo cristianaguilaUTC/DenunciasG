@@ -26,7 +26,7 @@
                         <td>{{ ciudadanoTemplate.cedula }}</td>
                         <td>{{ ciudadanoTemplate.correo }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{% url 'editar_c' ciudadanoTemplate.id %}" class="btn btn-primary btn-sm">Editar</a>
                             <a href="#" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ ciudadanoTemplate.id }}')">Eliminar</a>
                         </td>
                     </tr>
