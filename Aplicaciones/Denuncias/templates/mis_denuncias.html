@@ -1,0 +1,49 @@
+{% extends "plantilla1.html" %}
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Mis Denuncias</h2>
+
+    {% if denuncias %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="tbl_denuncias">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Referencia</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for denuncia in denuncias %}
+                        <tr>
+                            <td>{{ denuncia.tipo }}</td>
+                            <td>{{ denuncia.descripcion }}</td>
+                            <td>{{ denuncia.referencia }}</td>
+                            <td>{{ denuncia.estado }}</td>
+                            <td>{{ denuncia.fecha_creacion|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center">No has realizado ninguna denuncia todavía.</p>
+    {% endif %}
+</div>
+<script>
+    // modulo de prueba
+        $(document).ready(function() {
+           $('#tbl_denuncias').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "plantilla1.html" %}
+{% block contenido %}
+<br>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-8">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary fw-bold">Crear Denuncia Ciudadana</h3>
+                    <p class="text-muted">Redacta tu denuncia con la mayor claridad posible</p>
+                </div>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Tipo de denuncia -->
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="tipo" name="tipo" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="Agua Potable">Agua Potable</option>
+                            <option value="Alcantarillado">Alcantarillado</option>
+                            <option value="Basura en la calle">Basura en la calle</option>
+                            <option value="Basura en parques">Basura en parques</option>
+                            <option value="Calles de tierra">Calles de tierra</option>
+                            <option value="Calles con baches">Calles con baches</option>
+                            <option value="Alumbrado público dañado">Alumbrado público dañado</option>
+                            <option value="Ruido excesivo">Ruido excesivo</option>
+                            <option value="Obstrucción de vías">Obstrucción de vías</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                        <label for="tipo"><i class="bi bi-flag-fill me-1"></i> Tipo de denuncia</label>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Describa el problema..." id="descripcion" name="descripcion" style="height: 150px;" required></textarea>
+                        <label for="descripcion"><i class="bi bi-pencil-fill me-1"></i> Descripción</label>
+                    </div>
+
+                    <!-- Latitud -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" readonly id="latitud" name="latitud" placeholder="Latitud" required>
+                        <label for="latitud"><i class="bi bi-geo-alt-fill me-1"></i> Latitud</label>
+                    </div>
+
+                    <!-- Longitud -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" readonly id="longitud" name="longitud" placeholder="Longitud" required>
+                        <label for="longitud"><i class="bi bi-geo-fill me-1"></i> Longitud</label>
+                    </div>
+
+                    <!-- Referencia -->
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Referencia del lugar" required>
+                        <label for="referencia"><i class="bi bi-map me-1"></i> Referencia</label>
+                    </div>
+
+                    
+                    <div class="form-control" id="mapa_denuncia" style="border:1px solid black; height:250px;
+                            width:100%"> 
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-success w-100">Enviar Denuncia</button>
+                </form>
+
+                {% if messages %}
+                    <div class="mt-3">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function initMap(){
+      var latitud_longitud= new google.maps.LatLng(-0.9374805,-78.6161327);
+      var mapa=new google.maps.Map(
+        document.getElementById('mapa_denuncia'),
+        {
+          center:latitud_longitud,
+          zoom:15,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        }
+      );
+      var marcador=new google.maps.Marker({
+        position:latitud_longitud,
+        map:mapa,
+        title:"Seleccione la direccion",
+        draggable:true
+      });
+      google.maps.event.addListener(
+        marcador,
+        'dragend',
+        function(event){
+          var latitud=this.getPosition().lat();
+          var longitud=this.getPosition().lng();
+          document.getElementById("latitud").value=latitud;
+          document.getElementById("longitud").value=longitud;
+        }
+      );
+    }
+
+</script>
+{% endblock %}

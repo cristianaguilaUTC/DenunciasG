@@ -1,0 +1,67 @@
+{% extends "plantilla2.html" %}
+{% block contenido %}
+
+<!-- Gráfico por día -->
+<div class="container mt-5">
+    <h3 class="text-center">Reporte de Denuncias por Día</h3>
+    <canvas id="graficoDia" height="100"></canvas>
+</div>
+
+<!-- Gráfico por mes -->
+<div class="container mt-5">
+    <h3 class="text-center">Reporte de Denuncias por Mes</h3>
+    <canvas id="graficoMes" height="100"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Gráfico por día
+    const ctxDia = document.getElementById('graficoDia').getContext('2d');
+    new Chart(ctxDia, {
+        type: 'line',
+        data: {
+            labels: {{ fechas_dia|safe }},
+            datasets: [{
+                label: 'Denuncias por día',
+                data: {{ totales_dia|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                borderWidth: 2,
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Cantidad' }},
+                x: { title: { display: true, text: 'Fecha' }}
+            }
+        }
+    });
+
+    // Gráfico por mes
+    const ctxMes = document.getElementById('graficoMes').getContext('2d');
+    new Chart(ctxMes, {
+        type: 'bar',
+        data: {
+            labels: {{ etiquetas_mes|safe }},
+            datasets: [{
+                label: 'Denuncias por mes',
+                data: {{ totales_mes|safe }},
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Cantidad' }},
+                x: { title: { display: true, text: 'Mes' }}
+            }
+        }
+    });
+</script>
+
+{% endblock %}

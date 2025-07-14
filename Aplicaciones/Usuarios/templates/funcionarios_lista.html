@@ -1,0 +1,77 @@
+{% extends "plantilla2.html" %}
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <br><br>
+        <h2>Lista de Funcionarios</h2>
+        <table class="table table-striped" id="tbl_funcionarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for funcionario in funcionarios %}
+                <tr>
+                    <td>{{ funcionario.id }}</td>
+                    <td>{{ funcionario.nombre }}</td>
+                    <td>{{ funcionario.apellido }}</td>
+                    <td>{{ funcionario.correo }}</td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ funcionario.id }}')" >Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<script>
+    function confirmarEliminacion(id) {
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "¡No podrás revertir esta acción!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/eliminar_funcionario/" + id;
+            } else {
+                Swal.fire({
+                    title: "Cancelado",
+                    text: "La acción fue cancelada.",
+                    icon: "info",
+                    confirmButtonText: "OK"
+                });
+            }
+        });
+    }
+</script>
+<script>
+    // modulo de prueba
+        $(document).ready(function() {
+           $('#tbl_funcionarios').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+{% endblock %}

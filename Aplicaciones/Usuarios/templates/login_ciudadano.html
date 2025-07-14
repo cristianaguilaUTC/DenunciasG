@@ -1,0 +1,65 @@
+{% extends "plantilla.html" %}
+{% block contenido %}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-5">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary fw-bold">Ingreso de Ciudadano</h3>
+                    <p class="text-muted">Accede para registrar tus denuncias</p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <!-- Campo cédula -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula" required>
+                        <label for="cedula"><i class="bi bi-person-badge me-1"></i> Cédula</label>
+                    </div>
+
+                    <!-- Campo contraseña -->
+                    <div class="form-floating mb-3 position-relative">
+                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                        <label for="contrasena"><i class="bi bi-lock me-1"></i> Contraseña</label>
+                        <button type="button" class="btn btn-sm btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2 password-toggle">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Iniciar Sesión</button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'register_ciudadano' %}" class="text-decoration-none text-primary">¿No tienes una cuenta? Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilo adicional (opcional) -->
+<style>
+    .form-floating > label i {
+        font-size: 1rem;
+    }
+</style>
+
+<!-- Script para mostrar/ocultar contraseña -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.querySelector('.password-toggle');
+    const passwordInput = document.getElementById('contrasena');
+    const icon = toggleBtn.querySelector('i');
+
+    toggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        icon.classList.toggle('bi-eye-fill');
+        icon.classList.toggle('bi-eye-slash-fill');
+    });
+});
+</script>
+
+{% endblock %}

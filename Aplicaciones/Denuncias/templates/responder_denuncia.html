@@ -1,0 +1,29 @@
+{% extends "plantilla2.html" %}
+{% block contenido %}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4>Responder Denuncia</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Denunciante:</strong> {{ denuncia.ciudadano.nombre }} {{ denuncia.ciudadano.apellido }}</p>
+            <p><strong>Tipo:</strong> {{ denuncia.tipo }}</p>
+            <p><strong>Descripción:</strong> {{ denuncia.descripcion }}</p>
+            <p><strong>Referencia:</strong> {{ denuncia.referencia }}</p>
+            <p><strong>Estado actual:</strong> {{ denuncia.estado }}</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Escribe tu respuesta:</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Enviar Respuesta</button>
+                <a href="{% url 'panel_funcionario' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
