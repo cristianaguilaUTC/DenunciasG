@@ -1,0 +1,66 @@
+{% extends "plantilla1.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-8">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                <h3 class="text-primary fw-bold">Editar mis Datos</h3>
+                <p class="text-muted">recuerde anotar sus datos antes de editar</p>
+                
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="cedula" class="form-label">Cédula</label>
+                        <input type="text" class="form-control" id="cedula" name="cedula" value="{{ ciudadano.cedula }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ ciudadano.nombre }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" value="{{ ciudadano.apellido }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="correo" name="correo" value="{{ ciudadano.correo }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contrasena" class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" value="{{ ciudadano.contrasena }}" required>
+                            <button type="button" class="btn btn-outline-secondary password-toggle" tabindex="-1">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a href="/mis_denuncias/" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleBtn = document.querySelector('.password-toggle');
+        const passwordInput = document.getElementById('contrasena');
+        const icon = toggleBtn.querySelector('i');
+    
+        toggleBtn.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            icon.classList.toggle('bi-eye-fill');
+            icon.classList.toggle('bi-eye-slash-fill');
+        });
+    });
+    </script>
+    
+{% endblock %}
