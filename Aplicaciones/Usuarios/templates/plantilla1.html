@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>GAD Municipal - Sistema de Denuncias</title>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+  
+  <meta name="description" content="Sistema de gestión de denuncias ciudadanas para el GAD Municipal.">
+  <meta name="keywords" content="GAD, Denuncias, Ciudadanía, Municipio, Gestión">
+
+  <link href="{% static 'img/logo.png' %}" rel="icon">
+  <link href="{% static 'img/logogad2.png' %}" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <link href="{% static 'plantilla/MediCio/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'plantilla/MediCio/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'plantilla/MediCio/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'plantilla/MediCio/assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'plantilla/MediCio/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'plantilla/MediCio/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'plantilla/MediCio/assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- Importando API de GOOGLE MAPS-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABE5OWEAIfoSVrz9VRsdXJgsciVbEwzxk&libraries=places&callback=initMap">
+</script>
+
+
+
+
+  <!--importado flife imput-->
+    <!-- Bootstrap FileInput -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/js/locales/es.min.js"></script>
+
+    <!-- DataTables v1.13.7 + Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTables Buttons -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+    <!-- Exportación (ZIP, PDF) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!--Idioma español para agregar la imagen-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/js/locales/es.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"></script>
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="d-none d-md-flex align-items-center">
+          <i class="bi bi-clock me-1"></i> Lunes - Viernes, 8AM a 17PM
+        </div>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-phone me-1"></i> Teléfono del GAD: +593 98545 54242 - (04) 2733 775 
+        </div>
+      </div>
+    </div>
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-end">
+        <a href="/" class="logo d-flex align-items-center me-auto">
+          <img src="{% static 'img/logog.png' %}" alt="Logo GAD Municipal">
+          
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/mis_denuncias/">Mis Denuncias</a></li>
+            <li><a href="/crear_denuncia/">Nueva Denuncia</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="">Configuración</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'editar_mi_perfil' %}">Editar mis datos</a>
+                    <a href="/">Cerrar Sesión</a>
+                </div>
+            </li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  {% block contenido %}
+  {% endblock %}
+
+  
+<footer id="footer" class="footer light-background">
+<hr>
+<div class="container footer-top">
+  <div class="row gy-4">
+    <div class="col-lg-4 col-md-6 footer-about">
+      <a href="/" class="logo d-flex align-items-center">
+        <span class="sitename">GAD Municipal</span>
+      </a>
+      <div class="footer-contact pt-3">
+        <p>Cotopaxi, Latacunga</p>
+        <p>ECUADOR</p>
+        <p class="mt-3"><strong>Teléfono:</strong> <span>+593 98545 54242</span></p>
+        <p><strong>Correo:</strong> <span>info@gadmunicipal.gob.ec</span></p>
+      </div>
+      <div class="social-links d-flex mt-4">
+        <a href="#"><i class="bi bi-twitter-x"></i></a>
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-3 footer-links">
+      <h4>Políticas</h4>
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="#">Acerca de</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Términos de servicio</a></li>
+        <li><a href="#">Política de privacidad</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-2 col-md-3 footer-links">
+      <h4>Servicios del GAD</h4>
+      <ul>
+        <li><a href="/denuncias/nueva/">Registrar Denuncia</a></li>
+        <li><a href="/denuncias/">Consultar Denuncia</a></li>
+        <li><a href="#">Trámites Online</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-2 col-md-3 footer-links">
+      <h4>Secciones del Sitio</h4>
+      <ul>
+        <li><a href="#">Noticias</a></li>
+        <li><a href="#">Eventos</a></li>
+        <li><a href="#">Transparencia</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-2 col-md-3 footer-links">
+      <h4>Recursos</h4>
+      <ul>
+        <li><a href="#">Descargas</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Ayuda</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container copyright text-center mt-4">
+  <p>© <span>Copyright</span> <strong class="px-1 sitename">GAD Municipal</strong> <span>[Tu Nombre]</span></p>
+  <div class="credits">
+    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+  </div>
+</div>
+</footer>
+
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
+
+<script src="{% static 'plantilla/MediCio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'plantilla/MediCio/assets/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'plantilla/MediCio/assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'plantilla/MediCio/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'plantilla/MediCio/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'plantilla/MediCio/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'plantilla/MediCio/assets/js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+{% for mensaje in messages %}
+  <script>
+      Swal.fire({
+          title: "¡Confirmado!",
+          text: "{{ mensaje }}",
+          icon: "success",
+          timer: 2500,
+          showConfirmButton: false
+      });
+  </script>
+{% endfor %}
+{% endif %}
+
+<style>
+.error {
+  color: red;
+  font-weight: bold;
+}
+.form-control.error {
+  border: 1px solid red;
+}
+</style>
+<style>
+    /* Estilos para el submenú desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3498DB;
+    color: white;
+}
+</style>
+</body>
+</html>
