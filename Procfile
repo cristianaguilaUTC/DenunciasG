@@ -1,1 +1,1 @@
-web: gunicorn pwaDenunciasG.wsgi
+web: gunicorn DenunciasG.wsgi
