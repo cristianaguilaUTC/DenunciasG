@@ -11,7 +11,7 @@
             
                 </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" id="frm_editar">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="tipo" class="form-label">Tipo de Denuncia</label>
@@ -33,4 +33,25 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#frm_editar").validate({
+            rules: {
+                descripcion: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 1000
+                }
+            },
+            messages: {
+                descripcion: {
+                    required: "Por favor ingresa una descripción.",
+                    minlength: "Debe tener al menos 10 caracteres.",
+                    maxlength: "No debe exceder los 1000 caracteres."
+                }
+            }
+        });
+    });
+</script>
+
 {% endblock %}

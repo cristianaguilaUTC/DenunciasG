@@ -11,7 +11,7 @@
                 
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" id="frm_editar_datos">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="cedula" class="form-label">Cédula</label>
@@ -65,6 +65,77 @@
             icon.classList.toggle('bi-eye-slash-fill');
         });
     });
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#frm_editar_datos").validate({
+                rules: {
+                    cedula: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10,
+                        digits: true
+                    },
+                    nombre: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 30
+                    },
+                    apellido: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 30
+                    },
+                    telefono: {
+                        required: true,
+                        digits: true,
+                        minlength: 7,
+                        maxlength: 10
+                    },
+                    correo: {
+                        required: true,
+                        email: true
+                    },
+                    contrasena: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    cedula: {
+                        required: "Por favor ingresa tu cédula.",
+                        minlength: "Debe tener exactamente 10 dígitos.",
+                        maxlength: "Debe tener exactamente 10 dígitos.",
+                        digits: "Solo se permiten números."
+                    },
+                    nombre: {
+                        required: "Por favor ingresa tu nombre.",
+                        minlength: "Debe tener al menos 3 caracteres.",
+                        maxlength: "Máximo 30 caracteres."
+                    },
+                    apellido: {
+                        required: "Por favor ingresa tu apellido.",
+                        minlength: "Debe tener al menos 3 caracteres.",
+                        maxlength: "Máximo 30 caracteres."
+                    },
+                    telefono: {
+                        required: "Por favor ingresa tu número de teléfono.",
+                        digits: "Solo se permiten números.",
+                        minlength: "Debe tener al menos 7 dígitos.",
+                        maxlength: "Máximo 10 dígitos."
+                    },
+                    correo: {
+                        required: "Por favor ingresa tu correo.",
+                        email: "Debe ser un correo válido."
+                    },
+                    contrasena: {
+                        required: "Por favor ingresa tu contraseña.",
+                        minlength: "Debe tener al menos 6 caracteres."
+                    }
+                }
+            });
+        });
     </script>
     
 {% endblock %}
