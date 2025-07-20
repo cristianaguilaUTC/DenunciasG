@@ -69,38 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 contrasena: {
                     required: true
-                    
-                }
-            },
-            messages: {
-                cedula: {
-                    required: ".",
-                    minlength: ".",
-                    maxlength: ".",
-                    digits: ".",
-                },
-                contrasena: {
-                    required: "."                    
-                }
-            }
-        });
-    });
-</script>
-
-
-
-<script>
-    $(document).ready(function () {
-        $("#frm_login").validate({
-            rules: {
-                cedula: {
-                    required: true,
-                    minlength: 10,
-                    maxlength: 10,
-                    digits: true
-                },
-                contrasena: {
-                    required: true
                 }
             },
             messages: {
