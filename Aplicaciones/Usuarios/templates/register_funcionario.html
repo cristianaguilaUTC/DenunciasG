@@ -13,16 +13,15 @@
                 <form method="post" id="frm_funcionario">
                     {% csrf_token %}
 
-                    <div class="form-floating mb-3 position-relative">
+                    
                         <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo institucional" required>
                         <label for="correo"><i class="bi bi-envelope-at me-1"></i> Correo</label>
-                    </div>
                     
 
-                    <div class="form-floating mb-3">
+                    
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                         <label for="nombre"><i class="bi bi-person-fill me-1"></i> Nombre</label>
-                    </div>
+                    
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
@@ -74,14 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
     $(document).ready(function () {
         $("#frm_funcionario").validate({
-            errorPlacement: function (error, element) {
-                if (element.closest('.form-floating').length) {
-                    error.insertAfter(element); // inserta después del input
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-                    rules: {
+            rules: {
                 correo: {
                     required: true,
                     email: true
@@ -133,10 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     minlength: "Debe tener al menos 6 caracteres."
                 }
             }
-
-            
         });
-        
     });
 </script>
 
