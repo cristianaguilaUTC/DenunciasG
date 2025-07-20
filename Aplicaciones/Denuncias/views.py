@@ -7,7 +7,7 @@ from django.conf import settings
 
 from django.db.models.functions import TruncDate,TruncMonth
 from django.db.models import Count
-from .models import Denuncia
+from .models import Denuncia,Respuesta
 import calendar
 
 def reporte_completo_denuncias(request):
@@ -153,6 +153,15 @@ def eliminar_denuncia(request,id):
     Eliminar.delete()
     messages.success(request,"Eliminado exitosamente")
     return redirect('panel_funcionario')
+
+
+
+
+def respuesta_lista(request):
+    respuestas = Respuesta.objects.select_related(
+        'denuncia__ciudadano', 'funcionario'
+    ).all().order_by('-fecha_respuesta')
+    return render(request, 'respuesta_lista.html', {'respuestas': respuestas})
 
 
 

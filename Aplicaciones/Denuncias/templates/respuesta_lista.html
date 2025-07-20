@@ -1,0 +1,52 @@
+{% extends "plantilla2.html" %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <br><br>
+        <h2>Lista de Respuestas</h2>
+        <table class="table table-striped" id="tbl_respuestas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ciudadano</th>
+                    <th>Título Denuncia</th>
+                    <th>Fecha Denuncia</th>
+                    <th>Funcionario</th>
+                    <th>Mensaje de Respuesta</th>
+                    <th>Fecha de Respuesta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in respuestas %}
+                <tr>
+                    <td>{{ r.id }}</td>
+                    <td>{{ r.denuncia.ciudadano.nombre }} {{ r.denuncia.ciudadano.apellido }}</td>
+                    <td>{{ r.denuncia.tipo }}</td>
+                    <td>{{ r.denuncia.fecha_creacion|date:"Y-m-d H:i" }}</td>
+                    <td>{{ r.funcionario.nombre }} {{ r.funcionario.apellido }}</td>
+                    <td>{{ r.mensaje }}</td>
+                    <td>{{ r.fecha_respuesta|date:"Y-m-d H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#tbl_respuestas').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
+{% endblock %}
