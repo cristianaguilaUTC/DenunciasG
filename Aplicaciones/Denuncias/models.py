@@ -13,7 +13,7 @@ class Denuncia(models.Model):
     referencia = models.CharField(max_length=255)
     estado = models.CharField(max_length=50, default='Pendiente')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    imagen = models.ImageField(upload_to='media/', blank=True, null=True)  # ✅
+    imagen = models.FileField(upload_to='media/', blank=True, null=True)  # ✅
 
     def __str__(self):
         return f"Denuncia de {self.ciudadano.nombre} - {self.tipo}"
