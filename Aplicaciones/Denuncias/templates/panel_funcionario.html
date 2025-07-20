@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <h2>Gestion de Denuncias</h2>
+            <h2>Gestión de Denuncias</h2>
             <table class="table table-striped" id="tbl_denuncias">
                 <thead>
                     <tr>
@@ -14,6 +14,7 @@
                         <th>Descripción</th>
                         <th>Ciudadano</th>
                         <th>Estado</th>
+                        <th>Creado fecha</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -32,6 +33,7 @@
                             <span class="text-muted">Ya respondida</span>
                         {% endif %}
                         </td>
+                        <td>{{ funcionario.fecha_creacion|date:"Y-m-d H:i" }}</td>
                         <td>
                             <a href="{% url 'editar_denuncia' denuncia.id %}" class="btn btn-primary btn-sm">Editar</a>
                             <a href="#" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ denuncia.id }}')">Eliminar</a>
