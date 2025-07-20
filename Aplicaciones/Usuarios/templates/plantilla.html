@@ -184,14 +184,27 @@
 
 
 <style>
-.error {
-  color: red;
-  font-weight: bold;
-}
-.form-control.error {
-  border: 1px solid red;
-}
+  .error {
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-size: 0.9em;
+  }
+
+  .form-floating {
+    position: relative; /* Necesario para posicionar el .error adentro */
+  }
+
+  .form-control.error {
+    border: 1px solid red;
+  }
 </style>
+
+
 <style>
     /* Estilos para el submenú desplegable */
 .dropdown {

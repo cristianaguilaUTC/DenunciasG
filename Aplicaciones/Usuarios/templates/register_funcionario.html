@@ -10,7 +10,7 @@
                     <p class="text-muted">Formulario exclusivo para personal del GAD autorizado</p>
                 </div>
 
-                <form method="post">
+                <form method="post" id="frm_funcionario">
                     {% csrf_token %}
 
                     <div class="form-floating mb-3">
@@ -68,5 +68,75 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+<!-- jQuery Validation para funcionario -->
+<script>
+    $(document).ready(function () {
+      $("#frm_funcionario").validate({
+        rules: {
+          correo: {
+            required: true,
+            email: true
+          },
+          nombre: {
+            required: true,
+            minlength: 3,
+            maxlength: 30
+          },
+          apellido: {
+            required: true,
+            minlength: 3,
+            maxlength: 30
+          },
+          telefono: {
+            required: true,
+            number: true,
+            minlength: 7,
+            maxlength: 10
+          },
+          contrasena: {
+            required: true,
+            minlength: 6
+          }
+        },
+        messages: {
+          correo: {
+            required: "Correo requerido",
+            email: "Formato inválido"
+          },
+          nombre: {
+            required: "Nombre requerido",
+            minlength: "Mínimo 3 letras",
+            maxlength: "Máximo 30 letras"
+          },
+          apellido: {
+            required: "Apellido requerido",
+            minlength: "Mínimo 3 letras",
+            maxlength: "Máximo 30 letras"
+          },
+          telefono: {
+            required: "Teléfono requerido",
+            number: "Solo números",
+            minlength: "Mínimo 7 dígitos",
+            maxlength: "Máximo 10 dígitos"
+          },
+          contrasena: {
+            required: "Contraseña requerida",
+            minlength: "Mínimo 6 caracteres"
+          }
+        },
+        errorPlacement: function (error, element) {
+          element.closest('.form-floating').append(error);
+        },
+        highlight: function (element) {
+          $(element).addClass('error');
+        },
+        unhighlight: function (element) {
+          $(element).removeClass('error');
+        }
+      });
+    });
+    </script>
+    
 
 {% endblock %}
