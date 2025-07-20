@@ -5,6 +5,7 @@
     <div class="col-md-6">
         <div class="card shadow-lg rounded-4">
             <div class="card-body p-5">
+                <div id="alertas-validacion" style="position: fixed; top: 20px; left: 20px; z-index: 9999; width: 350px;"></div>
                 <div class="text-center mb-4">
                     <h3 class="text-primary fw-bold">Registro de Ciudadano</h3>
                     <p class="text-muted">Completa el formulario para crear tu cuenta</p>
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
  <!--envever codigo javascript/jquery dentro de html -->
-<script>
+ <script>
     $(document).ready(function () {
         $("#frm_generar_ciudadano").validate({
             rules: {
@@ -116,40 +117,63 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             messages: {
                 nombre: {
-                    required: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "El nombre es obligatorio",
+                    minlength: "Mínimo 3 caracteres",
+                    maxlength: "Máximo 30 caracteres"
                 },
                 apellido: {
-                    required: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "El apellido es obligatorio",
+                    minlength: "Mínimo 3 caracteres",
+                    maxlength: "Máximo 30 caracteres"
                 },
                 cedula: {
-                    required: ".",
-                    number: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "La cédula es obligatoria",
+                    number: "Solo números",
+                    minlength: "Debe tener 10 dígitos",
+                    maxlength: "Debe tener 10 dígitos"
                 },
                 telefono: {
-                    required: ".",
-                    number: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "El teléfono es obligatorio",
+                    number: "Solo números",
+                    minlength: "Mínimo 7 dígitos",
+                    maxlength: "Máximo 10 dígitos"
                 },
                 correo: {
-                    required: ".",
-                    email: "."
+                    required: "El correo es obligatorio",
+                    email: "Formato de correo inválido"
                 },
                 contrasena: {
-                    required: ".",
-                    minlength: "."
+                    required: "La contraseña es obligatoria",
+                    minlength: "Mínimo 6 caracteres"
                 }
+            },
+            errorPlacement: function(error, element) {
+                // No muestra errores debajo de los inputs
+                return true;
+            },
+            showErrors: function(errorMap, errorList) {
+                // Limpiar alertas anteriores
+                $('#alertas-validacion').html('');
+
+                // Mostrar todos los errores como alertas
+                if (errorList.length) {
+                    errorList.forEach(errorItem => {
+                        const alerta = `
+                            <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+                                <i class="bi bi-exclamation-circle me-2"></i>${errorItem.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>`;
+                        $('#alertas-validacion').append(alerta);
+                    });
+                }
+
+                this.defaultShowErrors(); // Sigue marcando en rojo los inputs
             }
         });
     });
 </script>
 
+        
 {% endblock %}
  
 

@@ -5,6 +5,8 @@
     <div class="col-md-8">
         <div class="card shadow-lg rounded-4">
             <div class="card-body p-5">
+                <div id="alertas-validacion" style="position: fixed; top: 20px; left: 20px; z-index: 9999; width: 350px;"></div>
+
                 <div class="text-center mb-4">
                     <h3 class="text-primary fw-bold">Crear Denuncia Ciudadana</h3>
                     <p class="text-muted">Redacta tu denuncia con la mayor claridad posible</p>
@@ -115,6 +117,83 @@
             showCaption: false,
             dropZoneEnabled: true,
             showClose: false
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("form").validate({
+            rules: {
+                tipo: {
+                    required: true
+                },
+                descripcion: {
+                    required: true,
+                    minlength: 10
+                },
+                imagen: {
+                    required: true,
+                    extension: "png|jpg|jpeg"
+                },
+                latitud: {
+                    required: true
+                },
+                longitud: {
+                    required: true
+                },
+                referencia: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages: {
+                tipo: {
+                    required: "Debe seleccionar un tipo de denuncia"
+                },
+                descripcion: {
+                    required: "La descripción es obligatoria",
+                    minlength: "Debe tener al menos 10 caracteres"
+                },
+                imagen: {
+                    required: "Debe subir una imagen",
+                    extension: "Solo se permiten imágenes JPG, PNG o JPEG"
+                },
+                latitud: {
+                    required: "Debe seleccionar una ubicación en el mapa"
+                },
+                longitud: {
+                    required: "Debe seleccionar una ubicación en el mapa"
+                },
+                referencia: {
+                    required: "La referencia es obligatoria",
+                    minlength: "Debe tener al menos 5 caracteres"
+                }
+            },
+            errorPlacement: function(error, element) {
+                // Evita mostrar mensajes debajo de los inputs
+                return true;
+            },
+            showErrors: function(errorMap, errorList) {
+                // Limpia alertas anteriores
+                $('#alertas-validacion').html('');
+
+                // Muestra todos los errores como alertas flotantes
+                if (errorList.length) {
+                    errorList.forEach(errorItem => {
+                        const alerta = `
+                            <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+                                <i class="bi bi-exclamation-circle me-2"></i>${errorItem.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>`;
+                        $('#alertas-validacion').append(alerta);
+                    });
+                }
+
+                this.defaultShowErrors(); // mantiene el borde rojo en campos con error
+            }
+        });
     });
 </script>
 

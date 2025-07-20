@@ -5,6 +5,8 @@
     <div class="col-md-5">
         <div class="card shadow-lg rounded-4">
             <div class="card-body p-5">
+                <div id="alertas-validacion" style="position: fixed; top: 20px; left: 20px; z-index: 9999; width: 350px;"></div>
+
                 <div class="text-center mb-4">
                     <h3 class="text-primary fw-bold">Ingreso de Funcionarios</h3>
                     <p class="text-muted">Panel exclusivo para personal autorizado del GAD</p>
@@ -62,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     email: true
                 },
                 contrasena: {
-                    required: true,
-                    minlength: 6
+                    required: true
+                   
                 }
             },
             messages: {
@@ -72,9 +74,58 @@ document.addEventListener('DOMContentLoaded', function () {
                     email: "."
                 },
                 contrasena: {
-                    required: ".",
-                    minlength: "."
+                    required: "."
+                    
                 }
+            }
+        });
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#frm_login").validate({
+            rules: {
+                correo: {
+                    required: true,
+                    email: true
+                },
+                contrasena: {
+                    required: true
+                }
+            },
+            messages: {
+                correo: {
+                    required: "El correo es obligatorio",
+                    email: "Formato de correo inválido"
+                },
+                contrasena: {
+                    required: "La contraseña es obligatoria"
+                }
+            },
+            errorPlacement: function(error, element) {
+                // No mostrar error debajo del input
+                return true;
+            },
+            showErrors: function(errorMap, errorList) {
+                // Limpiar alertas previas
+                $('#alertas-validacion').html('');
+
+                // Mostrar cada error como alerta Bootstrap
+                if (errorList.length) {
+                    errorList.forEach(errorItem => {
+                        const alerta = `
+                            <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+                                <i class="bi bi-exclamation-circle me-2"></i>${errorItem.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>`;
+                        $('#alertas-validacion').append(alerta);
+                    });
+                }
+
+                this.defaultShowErrors(); // Mantiene los bordes rojos en inputs inválidos
             }
         });
     });
