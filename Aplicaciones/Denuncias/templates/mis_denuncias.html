@@ -10,6 +10,7 @@
                     <tr>
                         <th>Tipo</th>
                         <th>Descripción</th>
+                        <th>Evidencia</th>
                         <th>Referencia</th>
                         <th>Estado</th>
                         <th>Fecha</th>
@@ -20,6 +21,13 @@
                         <tr>
                             <td>{{ denuncia.tipo }}</td>
                             <td>{{ denuncia.descripcion }}</td>
+                            <td>
+                                {% if denuncia.imagen %}
+                                    <img src="{{denuncia.imagen.url}}" alt="250" height="200px">
+                                {% else %}
+                                    Ninguna
+                                {% endif%}
+                            </td>
                             <td>{{ denuncia.referencia }}</td>
                             <td>{{ denuncia.estado }}</td>
                             <td>{{ denuncia.fecha_creacion|date:"d/m/Y H:i" }}</td>

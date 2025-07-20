@@ -53,6 +53,7 @@ def crear_denuncia(request):
     if request.method == "POST":
         tipo = request.POST["tipo"]
         descripcion = request.POST["descripcion"]
+        imagenSubiendo=request.FILES.get("imagen") 
         latitud = request.POST["latitud"]
         longitud = request.POST["longitud"]
         referencia = request.POST["referencia"]
@@ -61,6 +62,7 @@ def crear_denuncia(request):
             ciudadano=ciudadano,
             tipo=tipo,
             descripcion=descripcion,
+            imagen=imagenSubiendo,
             latitud=latitud,
             longitud=longitud,
             referencia=referencia
