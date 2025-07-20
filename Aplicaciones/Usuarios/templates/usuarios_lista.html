@@ -15,6 +15,8 @@
                         <th>Cédula</th>
                         <th>Teléfono</th>
                         <th>Correo</th>
+                        <th>Creado fecha</th>
+                        <th>Última Edición</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -27,6 +29,8 @@
                         <td>{{ ciudadanoTemplate.telefono }}</td>
                         <td>{{ ciudadanoTemplate.cedula }}</td>
                         <td>{{ ciudadanoTemplate.correo }}</td>
+                        <td>{{ ciudadanoTemplate.fecha_creacion|date:"Y-m-d H:i" }}</td>
+                        <td>{{ ciudadanoTemplate.fecha_actualizacion|date:"Y-m-d H:i" }}</td>
                         <td>
                             <a href="{% url 'editar_c' ciudadanoTemplate.id %}" class="btn btn-primary btn-sm">Editar</a>
                             <a href="#" class="btn btn-danger btn-sm" onclick="confirmarEliminacion('{{ ciudadanoTemplate.id }}')">Eliminar</a>
