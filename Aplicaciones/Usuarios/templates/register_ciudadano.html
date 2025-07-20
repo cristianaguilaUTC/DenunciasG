@@ -10,7 +10,7 @@
                     <p class="text-muted">Completa el formulario para crear tu cuenta</p>
                 </div>
 
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" id="frm_generar_ciudadano">
                     {% csrf_token %}
 
                     <div class="form-floating mb-3">
@@ -72,6 +72,79 @@ document.addEventListener('DOMContentLoaded', function () {
         icon.classList.toggle('bi-eye-slash-fill');
     });
 });
+</script>
+
+
+ <!--envever codigo javascript/jquery dentro de html -->
+<script>
+    $(document).ready(function () {
+        $("#frm_generar_ciudadano").validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                apellido: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                cedula: {
+                    required: true,
+                    number: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                telefono: {
+                    required: true,
+                    number: true,
+                    minlength: 7,
+                    maxlength: 10
+                },
+                correo: {
+                    required: true,
+                    email: true
+                },
+                contrasena: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "Por favor ingresa tu nombre.",
+                    minlength: "Debe tener al menos 3 caracteres.",
+                    maxlength: "Máximo 30 caracteres."
+                },
+                apellido: {
+                    required: "Por favor ingresa tu apellido.",
+                    minlength: "Debe tener al menos 3 caracteres.",
+                    maxlength: "Máximo 30 caracteres."
+                },
+                cedula: {
+                    required: "Por favor ingresa tu cédula.",
+                    number: "Solo se permiten números.",
+                    minlength: "La cédula debe tener 10 dígitos.",
+                    maxlength: "La cédula debe tener 10 dígitos."
+                },
+                telefono: {
+                    required: "Por favor ingresa tu número de teléfono.",
+                    number: "Solo se permiten números.",
+                    minlength: "El teléfono debe tener al menos 7 dígitos.",
+                    maxlength: "Máximo 10 dígitos."
+                },
+                correo: {
+                    required: "Por favor ingresa tu correo.",
+                    email: "Debe ser un correo válido."
+                },
+                contrasena: {
+                    required: "Por favor ingresa una contraseña.",
+                    minlength: "Debe tener al menos 6 caracteres."
+                }
+            }
+        });
+    });
 </script>
 
 {% endblock %}
