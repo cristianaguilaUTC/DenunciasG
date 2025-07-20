@@ -11,6 +11,10 @@ class Ciudadano(models.Model):
     correo = models.EmailField(unique=True)
     contrasena = models.CharField(max_length=128)
 
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
+
+
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
@@ -21,6 +25,10 @@ class Funcionario(models.Model):
     apellido = models.CharField(max_length=100)
     telefono = models.CharField(max_length=20, null=True, blank=True)
     contrasena = models.CharField(max_length=128)
+
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
