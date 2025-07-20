@@ -10,7 +10,7 @@
                     <p class="text-muted">Panel exclusivo para personal autorizado del GAD</p>
                 </div>
 
-                <form method="post">
+                <form method="post" id="frm_login">
                     {% csrf_token %}
 
                     <div class="form-floating mb-3">
@@ -51,6 +51,33 @@ document.addEventListener('DOMContentLoaded', function () {
         icon.classList.toggle('bi-eye-slash-fill');
     });
 });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#frm_login").validate({
+            rules: {
+                correo: {
+                    required: true,
+                    email: true
+                },
+                contrasena: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                correo: {
+                    required: ".",
+                    email: "."
+                },
+                contrasena: {
+                    required: ".",
+                    minlength: "."
+                }
+            }
+        });
+    });
 </script>
 
 {% endblock %}

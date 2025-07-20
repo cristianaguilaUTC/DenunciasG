@@ -78,6 +78,90 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
+ <!--envever codigo javascript/jquery dentro de html -->
+<script>
+    $(document).ready(function () {
+        $("#frm_generar_ciudadano").validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                apellido: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                cedula: {
+                    required: true,
+                    number: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                telefono: {
+                    required: true,
+                    number: true,
+                    minlength: 7,
+                    maxlength: 10
+                },
+                correo: {
+                    required: true,
+                    email: true
+                },
+                contrasena: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                nombre: {
+                    required: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                apellido: {
+                    required: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                cedula: {
+                    required: ".",
+                    number: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                telefono: {
+                    required: ".",
+                    number: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                correo: {
+                    required: ".",
+                    email: "."
+                },
+                contrasena: {
+                    required: ".",
+                    minlength: "."
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+ 
+
+
+
+
+
+
+
+
+
+
  <!--envever codigo javascript/jquery dentro de html 
 <script>
     $(document).ready(function () {
@@ -150,5 +234,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 </script>
 -->
-{% endblock %}
- 

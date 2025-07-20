@@ -69,6 +69,84 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<!-- jQuery Validation para funcionario -->
+<script>
+    $(document).ready(function () {
+        $("#frm_funcionario").validate({
+            rules: {
+                correo: {
+                    required: true,
+                    email: true
+                },
+                nombre: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                apellido: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                telefono: {
+                    required: true,
+                    number: true,
+                    minlength: 7,
+                    maxlength: 10
+                },
+                contrasena: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                correo: {
+                    required: ".",
+                    email: "."
+                },
+                nombre: {
+                    required: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                apellido: {
+                    required: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                telefono: {
+                    required: ".",
+                    number: ".",
+                    minlength: ".",
+                    maxlength: "."
+                },
+                contrasena: {
+                    required: ".",
+                    minlength: "."
+                }
+            }
+        });
+    });
+</script> 
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- jQuery Validation para funcionario 
 <script>
     $(document).ready(function () {
@@ -128,5 +206,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 </script> -->
-
-{% endblock %}
