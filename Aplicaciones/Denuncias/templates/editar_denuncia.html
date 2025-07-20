@@ -15,7 +15,7 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="tipo" class="form-label">Tipo de Denuncia</label>
-                        <input type="text" class="form-control" id="tipo" name="tipo" value="{{ denuncia.tipo }}" required>
+                        <input type="text" class="form-control" id="tipo" readonly name="tipo" value="{{ denuncia.tipo }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
