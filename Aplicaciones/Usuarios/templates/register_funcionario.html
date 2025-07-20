@@ -13,25 +13,26 @@
                 <form method="post">
                     {% csrf_token %}
 
-                    <!-- Correo -->
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo institucional" required>
                         <label for="correo"><i class="bi bi-envelope-at me-1"></i> Correo</label>
                     </div>
 
-                    <!-- Nombre -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                         <label for="nombre"><i class="bi bi-person-fill me-1"></i> Nombre</label>
                     </div>
 
-                    <!-- Apellido -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
                         <label for="apellido"><i class="bi bi-person-fill-up me-1"></i> Apellido</label>
                     </div>
 
-                    <!-- Contraseña -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Télefono" required>
+                        <label for="telefono"><i class="bi bi-telephone-fill me-1"></i>Teléfono</label>
+                    </div>
+
                     <div class="form-floating mb-3 position-relative">
                         <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña" required>
                         <label for="contrasena"><i class="bi bi-lock-fill me-1"></i> Contraseña</label>
@@ -43,21 +44,9 @@
                     <button type="submit" class="btn btn-primary w-100">Registrarse</button>
                 </form>
 
-
                 <div class="text-center mt-4">
                     <a href="{% url 'login_funcionario' %}" class="text-decoration-none text-primary">¿Ya tienes una cuenta? Inicia sesión</a>
                 </div>
-
-                {% if messages %}
-                    <div class="mt-3">
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-2" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
             </div>
         </div>
     </div>

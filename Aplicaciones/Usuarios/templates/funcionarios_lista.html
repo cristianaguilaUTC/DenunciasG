@@ -14,6 +14,7 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Correo</th>
+                    <th>Teléfono</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td>{{ funcionario.id }}</td>
                     <td>{{ funcionario.nombre }}</td>
                     <td>{{ funcionario.apellido }}</td>
+                    <td>{{ funcionario.telefono }}</td>
                     <td>{{ funcionario.correo }}</td>
                     <td>
                         <a href="{% url 'editar_f' funcionario.id %}" class="btn btn-primary btn-sm">Editar</a>

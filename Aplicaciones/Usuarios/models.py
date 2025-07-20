@@ -7,6 +7,7 @@ class Ciudadano(models.Model):
     cedula = models.CharField(max_length=10, unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=20, null=True, blank=True)
     correo = models.EmailField(unique=True)
     contrasena = models.CharField(max_length=128)
 
@@ -18,6 +19,7 @@ class Funcionario(models.Model):
     correo = models.EmailField(unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=20, null=True, blank=True)
     contrasena = models.CharField(max_length=128)
 
     def __str__(self):

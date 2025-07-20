@@ -19,6 +19,7 @@ def register_ciudadano(request):
         cedula = request.POST["cedula"]
         nombre = request.POST["nombre"]
         apellido = request.POST["apellido"]
+        telefono = request.POST["telefono"]
         correo = request.POST["correo"]
         contrasena = request.POST["contrasena"]
         
@@ -27,6 +28,7 @@ def register_ciudadano(request):
                 cedula=cedula,
                 nombre=nombre,
                 apellido=apellido,
+                telefono=telefono,
                 correo=correo,
                 contrasena=contrasena
             )
@@ -44,6 +46,7 @@ def register_funcionario(request):
         correo = request.POST["correo"]
         nombre = request.POST["nombre"]
         apellido = request.POST["apellido"]
+        telefono = request.POST["telefono"]
         contrasena = request.POST["contrasena"]
         
         try:
@@ -51,6 +54,7 @@ def register_funcionario(request):
                 correo=correo,
                 nombre=nombre,
                 apellido=apellido,
+                telefono=telefono,
                 contrasena=contrasena
             )
             messages.success(request, "Registro exitoso. Puedes iniciar sesión ahora.")
@@ -115,6 +119,7 @@ def procesaredicionciudadano(request, id):
     cedula = request.POST.get("cedula")
     nombre = request.POST.get("nombre")
     apellido = request.POST.get("apellido")
+    telefono = request.POST.get("telefono")
     correo = request.POST.get("correo")
     contrasena = request.POST.get("contrasena")
 
@@ -122,6 +127,7 @@ def procesaredicionciudadano(request, id):
     ciudadano.cedula = cedula
     ciudadano.nombre = nombre
     ciudadano.apellido = apellido
+    ciudadano.telefono = telefono
     ciudadano.correo = correo
     ciudadano.contrasena = contrasena
     ciudadano.save()
@@ -153,12 +159,14 @@ def procesaredicionfuncionario(request, id):
    # Extraer datos del formulario
     nombre = request.POST.get("nombre")
     apellido = request.POST.get("apellido")
+    telefono = request.POST.get("telefono")
     correo = request.POST.get("correo")
     contrasena = request.POST.get("contrasena")
 
    # Actualizar campos
     funcionario.nombre = nombre
     funcionario.apellido = apellido
+    funcionario.telefono = telefono
     funcionario.correo = correo
     funcionario.contrasena = contrasena
     funcionario.save()
@@ -179,6 +187,7 @@ def editar_mi_perfil(request):
         ciudadano.cedula = request.POST.get("cedula")
         ciudadano.nombre = request.POST.get("nombre")
         ciudadano.apellido = request.POST.get("apellido")
+        ciudadano.telefono = request.POST.get("telefono")
         ciudadano.correo = request.POST.get("correo")
         ciudadano.contrasena = request.POST.get("contrasena")
         ciudadano.save()
@@ -198,6 +207,7 @@ def editar_mi_perfil_funcionario(request):
     if request.method == "POST":
         funcionario.nombre = request.POST.get("nombre")
         funcionario.apellido = request.POST.get("apellido")
+        funcionario.telefono = request.POST.get("telefono")
         funcionario.correo = request.POST.get("correo")
         funcionario.contrasena = request.POST.get("contrasena")
         funcionario.save()
@@ -210,8 +220,6 @@ def editar_mi_perfil_funcionario(request):
 def funcionarios_lista(request):
     funcionarios = Funcionario.objects.all()
     return render(request, "funcionarios_lista.html", {"funcionarios": funcionarios})
-
-
 
 
 def eliminar_funcionario(request,id):
