@@ -1,5 +1,6 @@
 {% extends "plantilla.html" %}
 {% block contenido %}
+<div id="alertas-validacion" style="position: fixed; top: 20px; left: 20px; z-index: 9999; width: 300px;"></div>
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-md-6">
@@ -69,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<!-- jQuery Validation para funcionario -->
 <script>
     $(document).ready(function () {
         $("#frm_funcionario").validate({
@@ -101,33 +101,51 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             messages: {
                 correo: {
-                    required: ".",
-                    email: "."
+                    required: "El correo es obligatorio",
+                    email: "Formato de correo inválido"
                 },
                 nombre: {
-                    required: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "El nombre es obligatorio",
+                    minlength: "Mínimo 3 caracteres",
+                    maxlength: "Máximo 30 caracteres"
                 },
                 apellido: {
-                    required: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "El apellido es obligatorio",
+                    minlength: "Mínimo 3 caracteres",
+                    maxlength: "Máximo 30 caracteres"
                 },
                 telefono: {
-                    required: ".",
-                    number: ".",
-                    minlength: ".",
-                    maxlength: "."
+                    required: "El teléfono es obligatorio",
+                    number: "Solo números",
+                    minlength: "Mínimo 7 dígitos",
+                    maxlength: "Máximo 10 dígitos"
                 },
                 contrasena: {
-                    required: ".",
-                    minlength: "."
+                    required: "La contraseña es obligatoria",
+                    minlength: "Mínimo 6 caracteres"
                 }
+            },
+            showErrors: function(errorMap, errorList) {
+                // Elimina alertas previas
+                $('#alertas-validacion').html('');
+    
+                // Muestra solo el primer error como alerta (puedes recorrerlos si quieres más)
+                if (errorList.length) {
+                    const mensaje = errorList[0].message;
+                    const alerta = `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>${mensaje}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                        </div>`;
+                    $('#alertas-validacion').append(alerta);
+                }
+    
+                this.defaultShowErrors();
             }
         });
     });
-</script> 
+    </script>
+    
 
 {% endblock %}
 
