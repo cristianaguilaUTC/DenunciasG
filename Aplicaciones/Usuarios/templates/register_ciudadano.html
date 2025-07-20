@@ -13,14 +13,16 @@
                 <form method="post" enctype="multipart/form-data" id="frm_generar_ciudadano">
                     {% csrf_token %}
 
+                    <label for="">Nombre:</label>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
-                        <label for="nombre"><i class="bi bi-person-fill me-1"></i> Nombre</label>
+                        <label for="nombre"><i class="bi bi-person-fill me-1"></i></label>
                     </div>
 
                     <div class="form-floating mb-3">
+                        <label for="">Apellido</label>
                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
-                        <label for="apellido"><i class="bi bi-person-fill-up me-1"></i> Apellido</label>
+                        <label for="apellido"><i class="bi bi-person-fill-up me-1"></i></label>
                     </div>
 
                     <div class="form-floating mb-3">
