@@ -13,40 +13,38 @@
                 <form method="post" enctype="multipart/form-data" id="frm_generar_ciudadano">
                     {% csrf_token %}
 
-                    <label for="">Nombre:</label>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
-                        <label for="nombre"><i class="bi bi-person-fill me-1"></i></label>
+                        <label for="nombre"><i class="bi bi-person-fill me-1"></i>Nombre</label>
                     </div>
 
-                    <label for="">Apellido:</label>
+              
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
-                        <label for="apellido"><i class="bi bi-person-fill-up me-1"></i></label>
+                        <label for="apellido"><i class="bi bi-person-fill-up me-1"></i>Apellido</label>
                     </div>
 
-                    <label for="">Cedula:</label>
+                
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula" required>
-                        <label for="cedula"><i class="bi bi-card-heading me-1"></i></label>
+                        <label for="cedula"><i class="bi bi-card-heading me-1"></i>Cédula</label>
                     </div>
 
-                    <label for="">Teléfono:</label>
+                
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" required>
-                        <label for="telefono"><i class="bi bi-telephone-fill me-1"></i></label>
+                        <label for="telefono"><i class="bi bi-telephone-fill me-1"></i>Teléfono</label>
                     </div>
-                    
-                    <label for="">Correo:</label>
+               
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo electrónico" required>
-                        <label for="correo"><i class="bi bi-envelope-at-fill me-1"></i></label>
+                        <label for="correo"><i class="bi bi-envelope-at-fill me-1"></i>Correo</label>
                     </div>
 
-                    <label for="">Contraseña:</label>
+                
                     <div class="form-floating mb-3 position-relative">
                         <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña" required>
-                        <label for="contrasena"><i class="bi bi-lock-fill me-1"></i></label>
+                        <label for="contrasena"><i class="bi bi-lock-fill me-1"></i>Contraseña</label>
                         <button type="button" class="btn btn-sm btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2 password-toggle">
                             <i class="bi bi-eye-fill"></i>
                         </button>
