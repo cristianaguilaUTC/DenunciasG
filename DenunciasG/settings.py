@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Aplicaciones.Usuarios',
-    'Aplicaciones.Denuncias'
+    'Aplicaciones.Denuncias',
+
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +156,4 @@ EMAIL_HOST_USER = 'tuhackerfav9@gmail.com'
 EMAIL_HOST_PASSWORD = 'afgr vkhk vofc hcyx'
 
 #--------------------------------------------------------
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
