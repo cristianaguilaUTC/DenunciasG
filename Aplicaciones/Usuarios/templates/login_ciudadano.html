@@ -12,14 +12,12 @@
 
                 <form method="post">
                     {% csrf_token %}
-                    
-                    <!-- Campo cédula -->
+
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula" required>
                         <label for="cedula"><i class="bi bi-person-badge me-1"></i> Cédula</label>
                     </div>
 
-                    <!-- Campo contraseña -->
                     <div class="form-floating mb-3 position-relative">
                         <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña" required>
                         <label for="contrasena"><i class="bi bi-lock me-1"></i> Contraseña</label>
@@ -39,12 +37,7 @@
     </div>
 </div>
 
-<!-- Estilo adicional (opcional) -->
-<style>
-    .form-floating > label i {
-        font-size: 1rem;
-    }
-</style>
+
 
 <!-- Script para mostrar/ocultar contraseña -->
 <script>

@@ -167,16 +167,21 @@
 {% if messages %}
 {% for mensaje in messages %}
   <script>
-      Swal.fire({
-          title: "¡Confirmado!",
-          text: "{{ mensaje }}",
-          icon: "success",
-          timer: 2500,
-          showConfirmButton: false
-      });
+    Swal.fire({
+        title: "{% if 'success' in mensaje.tags %}¡Confirmado!{% else %}¡Error!{% endif %}",
+        text: "{{ mensaje }}",
+        icon: "{{ mensaje.tags }}",
+        timer: 3000,
+        showConfirmButton: true,
+        confirmButtonText: "Cerrar"
+    });
   </script>
 {% endfor %}
 {% endif %}
+
+
+
+
 
 <style>
 .error {
