@@ -187,12 +187,23 @@
   .error {
     color: red;
     font-weight: bold;
+    display: block;
+    position: absolute;
+    top: 100%; /* justo debajo del input */
+    left: 0;
+    font-size: 0.875rem;
+    padding-top: 2px;
   }
+
   .form-control.error {
     border: 1px solid red;
   }
 
+  .form-floating {
+    position: relative; /* importante para posicionar el error */
+  }
 </style>
+
 
 <style>
     /* Estilos para el submenú desplegable */
