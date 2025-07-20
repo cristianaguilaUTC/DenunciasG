@@ -17,7 +17,7 @@
                     <form method="post" id="frm_respuesta">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="mensaje" class="form-label">Escribe tu respuesta:</label>
+                            <label for="mensaje" class="form-label"><b>Escribe tu respuesta:</b></label>
                             <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Enviar Respuesta</button>
@@ -30,7 +30,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#frm_respuestas").validate({
+        $("#frm_respuesta").validate({
             rules: {
                 mensaje: {
                     required: true,
