@@ -10,7 +10,7 @@
                     <p class="text-muted">Accede para registrar tus denuncias</p>
                 </div>
 
-                <form method="post">
+                <form method="post" id="frm_login">
                     {% csrf_token %}
 
                     <div class="form-floating mb-3">
@@ -55,4 +55,35 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+<script>
+    $(document).ready(function () {
+        $("#frm_login").validate({
+            rules: {
+                cedula: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10,
+                    digits: true
+                },
+                contrasena: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                cedula: {
+                    required: ".",
+                    minlength: ".",
+                    maxlength: ".",
+                    digits: ".",
+                },
+                contrasena: {
+                    required: ".",
+                    minlength: ".",
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
