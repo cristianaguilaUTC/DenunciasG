@@ -1,29 +1,50 @@
 {% extends "plantilla2.html" %}
 {% block contenido %}
-
-<div class="container mt-5">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h4>Responder Denuncia</h4>
-        </div>
-        <div class="card-body">
-            <p><strong>Denunciante:</strong> {{ denuncia.ciudadano.nombre }} {{ denuncia.ciudadano.apellido }}</p>
-            <p><strong>Tipo:</strong> {{ denuncia.tipo }}</p>
-            <p><strong>Descripción:</strong> {{ denuncia.descripcion }}</p>
-            <p><strong>Referencia:</strong> {{ denuncia.referencia }}</p>
-            <p><strong>Estado actual:</strong> {{ denuncia.estado }}</p>
-
-            <form method="post">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="mensaje" class="form-label">Escribe tu respuesta:</label>
-                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-8">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary fw-bold">Responder Denuncia</h3>
                 </div>
-                <button type="submit" class="btn btn-success">Enviar Respuesta</button>
-                <a href="{% url 'panel_funcionario' %}" class="btn btn-secondary">Cancelar</a>
-            </form>
+                <div class="card-body">
+                    <p><strong>Denunciante:</strong> {{ denuncia.ciudadano.nombre }} {{ denuncia.ciudadano.apellido }}</p>
+                    <p><strong>Tipo:</strong> {{ denuncia.tipo }}</p>
+                    <p><strong>Descripción:</strong> {{ denuncia.descripcion }}</p>
+                    <p><strong>Referencia:</strong> {{ denuncia.referencia }}</p>
+                    <p><strong>Estado actual:</strong> {{ denuncia.estado }}</p>
+
+                    <form method="post" id="frm_respuesta">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Escribe tu respuesta:</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Enviar Respuesta</button>
+                        <a href="{% url 'panel_funcionario' %}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#frm_respuestas").validate({
+            rules: {
+                mensaje: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+            messages: {
+                mensaje: {
+                    required: "Por favor escribe una respuesta.",
+                    minlength: "Tu respuesta debe tener al menos 10 caracteres."
+                }
+            },
+        });
+    });
+</script>
 
 {% endblock %}
