@@ -36,6 +36,12 @@
                         <textarea class="form-control" placeholder="Describa el problema..." id="descripcion" name="descripcion" style="height: 150px;" required></textarea>
                         <label for="descripcion"><i class="bi bi-pencil-fill me-1"></i> Descripción</label>
                     </div>
+                    
+                    <!-- imagen-->
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" id="imagen" name="imagen" placeholder="imagen" required>
+                        <label for="imagen"><i class="bi bi-geo-alt-fill me-1"></i>Imagen</label>
+                    </div>
 
                     <!-- Latitud -->
                     <div class="form-floating mb-3">
@@ -55,24 +61,16 @@
                         <label for="referencia"><i class="bi bi-map me-1"></i> Referencia</label>
                     </div>
 
-                    
+                     <!-- mapa -->
                     <div class="form-control" id="mapa_denuncia" style="border:1px solid black; height:250px;
                             width:100%"> 
                     </div>
                     <br>
                     <button type="submit" class="btn btn-success w-100">Enviar Denuncia</button>
+                    
                 </form>
 
-                {% if messages %}
-                    <div class="mt-3">
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                
             </div>
         </div>
     </div>
