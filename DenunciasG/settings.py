@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
 
-print("DEBUG VALUE:", config("DEBUG", default=False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,9 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Aplicaciones.Usuarios',
     'Aplicaciones.Denuncias',
-
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -158,4 +153,3 @@ EMAIL_HOST_USER = 'tuhackerfav9@gmail.com'
 EMAIL_HOST_PASSWORD = 'afgr vkhk vofc hcyx'
 
 #--------------------------------------------------------
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
