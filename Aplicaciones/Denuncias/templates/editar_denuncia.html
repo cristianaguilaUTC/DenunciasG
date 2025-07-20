@@ -1,12 +1,15 @@
 {% extends "plantilla.html" %}
 
 {% block contenido %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card mt-5">
-            <div class="card-header bg-primary text-white">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-8">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
                 <h3>Editar Denuncia</h3>
-            </div>
+                <p class="text-muted">Recuerde que al editar la denuncia como funcionario, solo para corregir ortografia o caligrafia</p>
+            
+                </div>
             <div class="card-body">
                 <form method="post">
                     {% csrf_token %}
@@ -26,6 +29,7 @@
                     <a href="{% url 'panel_funcionario' %}" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>
+        </div>
         </div>
     </div>
 </div>
