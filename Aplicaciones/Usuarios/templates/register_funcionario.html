@@ -1,9 +1,8 @@
 {% extends "plantilla.html" %}
 {% block contenido %}
-<div id="alertas-validacion" style="position: fixed; top: 20px; left: 20px; z-index: 9999; width: 300px;"></div>
-
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-md-6">
+        <div id="alertas-validacion" style="position: fixed; top: 20px; left: 20px; z-index: 9999; width: 350px;"></div>
         <div class="card shadow-lg rounded-4">
             <div class="card-body p-5">
                 <div class="text-center mb-4">
@@ -125,19 +124,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     minlength: "Mínimo 6 caracteres"
                 }
             },
+            errorPlacement: function(error, element) {
+                // Evita que los mensajes aparezcan debajo del input
+                return true;
+            },
             showErrors: function(errorMap, errorList) {
-                // Elimina alertas previas
+                // Limpia alertas anteriores
                 $('#alertas-validacion').html('');
     
-                // Muestra solo el primer error como alerta (puedes recorrerlos si quieres más)
+                // Muestra cada error como una alerta individual
                 if (errorList.length) {
-                    const mensaje = errorList[0].message;
-                    const alerta = `
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>${mensaje}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-                        </div>`;
-                    $('#alertas-validacion').append(alerta);
+                    errorList.forEach(errorItem => {
+                        const alerta = `
+                            <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+                                <i class="bi bi-exclamation-circle me-2"></i>${errorItem.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>`;
+                        $('#alertas-validacion').append(alerta);
+                    });
                 }
     
                 this.defaultShowErrors();
@@ -146,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     </script>
     
-
 {% endblock %}
 
 
