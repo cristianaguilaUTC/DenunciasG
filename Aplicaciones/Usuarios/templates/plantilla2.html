@@ -29,8 +29,11 @@
 
   <link href="{% static 'plantilla/MediCio/assets/css/main.css' %}" rel="stylesheet">
 
- 
-   <!--importado flife imput-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.18/index.min.js" integrity="sha512-xCMh+IX6X2jqIgak2DBvsP6DNPne/t52lMbAUJSjr3+trFn14zlaryZlBcXbHKw8SbrpS0n3zlqSVmZPITRDSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.18/index.global.js" integrity="sha512-jcs7DgTqJe3uCBLMVW9gZ14ZexvuDj7VwTbv/ICUbrmhp+wso9HKLGybE2QcImNLy4v4Pq/JVmn4dbYvZ2xaIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+  
+  
+  <!--importado flife imput-->
     <!-- Bootstrap FileInput -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js"></script>
@@ -234,7 +237,13 @@
 </style>
 
 
+<script>
+  $(document).ready(function (){ 
+    var calendar = $('#calendar').fullCalendar({
 
+    });
+  });
+</script>
 
 
 
