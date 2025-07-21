@@ -11,24 +11,26 @@
                 </div>
                     <form id="recuperar-form" method="POST">
                     {% csrf_token %}
-                    <label>Nombre:</label><br />
-                    <input type="text" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
+                    <label class="form-label">Nombre:</label><br />
+                    <input type="text" class="form-control" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
 
-                    <label>Apellido:</label><br />
-                    <input type="text" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
+                    <label class="form-label">Apellido:</label><br />
+                    <input type="text" class="form-control" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
 
-                    <label>Teléfono:</label><br />
-                    <input type="text" id="telefono" name="telefono" required /><br /><br />
+                    <label class="form-label">Teléfono:</label><br />
+                    <input type="text" class="form-control" id="telefono" name="telefono" required /><br /><br />
 
-                    <button type="submit">Enviar contraseña</button>
+                    <button class="btn btn-primary" type="submit">Enviar contraseña</button>
                     </form>
-
-                    <div id="loading" style="display:none; font-weight:bold; color:green;">Enviando contraseña... Por favor espera...</div>
+<br>
+                    <div id="loading" style="display:none; font-weight:bold; color:rgb(0, 113, 128);">Enviando contraseña... Por favor espera...</div>
                     <div id="mensaje"></div>
             </div>
         </div>
     </div>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
