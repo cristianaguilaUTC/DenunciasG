@@ -180,7 +180,7 @@ def calendario(request):
         tiene_respuesta = Respuesta.objects.filter(denuncia=denuncia).exists()
 
         # Definimos el color: verde si tiene respuesta, azul si no
-        color_evento = '#28a745' if tiene_respuesta else '#007bff'
+        color_evento = '#28a745' if tiene_respuesta else "#ff0000"
 
         temas_list.append({
             'id': denuncia.id,

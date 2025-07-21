@@ -2,6 +2,51 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Ciudadano,Funcionario
 
+#api telegram
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import requests
+
+
+TELEGRAM_TOKEN="8147077991:AAGXusGcLppbGDEG-ADvke-F286peDiixWQ"
+
+
+def enviar_mensaje(chat_id, texto):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    requests.post(url, data={
+        'chat_id': chat_id,
+        'text': texto
+    })
+
+@csrf_exempt
+def webhook_telegram(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        mensaje = data.get("message", {})
+        chat = mensaje.get("chat", {})
+        texto = mensaje.get("text", "")
+        chat_id = chat.get("id")
+
+        if texto.startswith("/vincular"):
+            cedula = texto.replace("/vincular", "").strip()
+
+            try:
+                ciudadano = Ciudadano.objects.get(cedula=cedula)
+                ciudadano.chat_id = chat_id
+                ciudadano.save()
+                enviar_mensaje(chat_id, f"✅ Vinculación exitosa, {ciudadano.nombre}. Ahora puedes recuperar tu contraseña.")
+            except Ciudadano.DoesNotExist:
+                enviar_mensaje(chat_id, "❌ Cédula no encontrada. Por favor revisa e intenta de nuevo.")
+
+        else:
+            enviar_mensaje(chat_id, "📌 Usa el comando:\n/vincular TU_CEDULA\npara registrar tu cuenta.")
+
+        return JsonResponse({"ok": True})
+
+    return JsonResponse({"error": "Método no permitido"}, status=405)
+
+#-------------------------------------
 
 def home(request):
     return redirect('menu')
