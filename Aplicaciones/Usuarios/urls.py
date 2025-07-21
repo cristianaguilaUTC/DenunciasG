@@ -20,5 +20,7 @@ urlpatterns = [
     path('eliminar_ciudadano/<id>',views.eliminar_ciudadano),
     path('webhook_telegram/', views.webhook_telegram),
     path('recuperar_contrasena/', views.recuperar_contrasena, name='recuperar_contrasena'),
-   
-]
+    
+    
+    
+ ]
