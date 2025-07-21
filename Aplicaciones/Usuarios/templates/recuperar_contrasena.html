@@ -1,25 +1,34 @@
 {% extends "plantilla.html" %}
 {% load static %}
 {% block contenido %}
-<h2>Recuperar Contraseña vía Telegram</h2>
 
-<form id="recuperar-form" method="POST">
-  {% csrf_token %}
-  <label>Nombre:</label><br />
-  <input type="text" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-8">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary fw-bold">Recuperar Contraseña vía Telegram</h3>
+                </div>
+                    <form id="recuperar-form" method="POST">
+                    {% csrf_token %}
+                    <label>Nombre:</label><br />
+                    <input type="text" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
 
-  <label>Apellido:</label><br />
-  <input type="text" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
+                    <label>Apellido:</label><br />
+                    <input type="text" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
 
-  <label>Teléfono:</label><br />
-  <input type="text" id="telefono" name="telefono" required /><br /><br />
+                    <label>Teléfono:</label><br />
+                    <input type="text" id="telefono" name="telefono" required /><br /><br />
 
-  <button type="submit">Enviar contraseña</button>
-</form>
+                    <button type="submit">Enviar contraseña</button>
+                    </form>
 
-<div id="loading" style="display:none; font-weight:bold; color:green;">Enviando contraseña... Por favor espera...</div>
-<div id="mensaje"></div>
-
+                    <div id="loading" style="display:none; font-weight:bold; color:green;">Enviando contraseña... Por favor espera...</div>
+                    <div id="mensaje"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet" />
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
