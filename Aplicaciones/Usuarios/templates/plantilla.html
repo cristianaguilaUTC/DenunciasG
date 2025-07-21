@@ -149,7 +149,86 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Mapa no cambia porque es un iframe externo */
+/* Aplica a todas las tablas dentro de .modo-oscuro */
+.modo-oscuro table {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+.modo-oscuro table th,
+.modo-oscuro table td {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+/* Encabezado con clase .table-primary */
+.modo-oscuro .table-primary {
+  background-color: #2b3e50 !important;
+  color: #ffffff !important;
+}
+
+/* Hover en filas */
+.modo-oscuro table.table-hover tbody tr:hover {
+  background-color: #333 !important;
+}
+
+/* Botones de DataTable */
+.modo-oscuro .dt-button {
+  background-color: #2b3e50 !important;
+  color: white !important;
+  border: 1px solid #444 !important;
+}
+
+.modo-oscuro .dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: white !important;
+  background: #1f1f1f !important;
+  border: 1px solid #555 !important;
+}
+
+/* Texto en mensaje si no hay datos */
+.modo-oscuro .dataTables_empty {
+  color: #ffffff !important;
+}
+
+/* Modo oscuro para el HEADER completo */
+.modo-oscuro .header,
+.modo-oscuro .topbar,
+.modo-oscuro .branding,
+.modo-oscuro .navmenu,
+.modo-oscuro .navmenu ul li a,
+.modo-oscuro .dropdown-content a {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+/* Links del menú */
+.modo-oscuro .navmenu ul li a {
+  color: #ffffff !important;
+}
+
+/* Hover en enlaces */
+.modo-oscuro .navmenu ul li a:hover,
+.modo-oscuro .dropdown-content a:hover {
+  background-color: #333 !important;
+  color: #00ffc3 !important;
+}
+
+/* Submenú desplegable */
+.modo-oscuro .dropdown-content {
+  background-color: #2a2a2a !important;
+  color: #fff !important;
+  border: 1px solid #444;
+}
+
+/* Botón modo oscuro también cambia si quieres */
+.modo-oscuro #modoOscuroToggle {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+}
 
     </style>
     
