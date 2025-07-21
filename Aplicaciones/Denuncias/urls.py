@@ -14,6 +14,4 @@ urlpatterns = [
     path('reporte_denuncias_completo/', views.reporte_completo_denuncias, name='reporte_completo_denuncias'),
     path('respuesta_lista/', views.respuesta_lista, name='respuesta_lista'),
     path('calendario/', views.calendario, name='calendario'),
-    path('eventos_denuncias/', views.eventos_denuncias, name='eventos_denuncias'),
-
 ]

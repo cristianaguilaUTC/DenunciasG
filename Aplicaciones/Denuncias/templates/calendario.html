@@ -1,37 +1,20 @@
 {% extends './plantilla2.html' %}
 {% block contenido %}
-<br><br>
-<div class="container">
-    <h2>Calendario de Denuncias</h2>
-    <div id="calendario"></div>
-</div>
+<script src="
+https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js
+"></script>
 
-<!-- FullCalendar core CSS & JS -->
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
 
+<div id="calendar"></div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendario');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'es',  // si quieres en español
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,listWeek'
-        },
-        events: '{% url "eventos_denuncias" %}',  // Tu endpoint de JSON
-        eventClick: function(info) {
-            info.jsEvent.preventDefault(); // evita el comportamiento por defecto
-            if (info.event.url) {
-                window.open(info.event.url, '_blank');
-            }
-        }
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarEl = document.getElementById('calendar')
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth'
+      })
+      calendar.render()
+    })
 
-    calendar.render();
-});
-</script>
+  </script>
 {% endblock %}
