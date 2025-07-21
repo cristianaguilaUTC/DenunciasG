@@ -346,18 +346,27 @@
 <script src="{% static 'plantilla/MediCio/assets/js/main.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
+
 {% if messages %}
 {% for mensaje in messages %}
-  <script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modoOscuroActivo = document.body.classList.contains("modo-oscuro");
+
     Swal.fire({
-        title: "{% if 'success' in mensaje.tags %}¡Confirmado!{% else %}¡Error!{% endif %}",
-        text: "{{ mensaje }}",
-        icon: "{{ mensaje.tags }}",
-        timer: 3000,
-        showConfirmButton: true,
-        confirmButtonText: "Cerrar"
+      title: "{% if 'success' in mensaje.tags %}¡Confirmado!{% else %}¡Error!{% endif %}",
+      text: "{{ mensaje }}",
+      icon: "{{ mensaje.tags }}",
+      timer: 3000,
+      showConfirmButton: true,
+      confirmButtonText: "Cerrar",
+      background: modoOscuroActivo ? "#1e1e1e" : "#fff",
+      color: modoOscuroActivo ? "#fff" : "#000"
     });
-  </script>
+  });
+</script>
 {% endfor %}
 {% endif %}
 

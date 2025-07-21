@@ -73,7 +73,6 @@
       /* Párrafos, textos generales */
       .modo-oscuro p,
       .modo-oscuro span,
-      .modo-oscuro label,
       .modo-oscuro h1,
       .modo-oscuro h2,
       .modo-oscuro h3,
@@ -348,18 +347,25 @@
 
 {% if messages %}
 {% for mensaje in messages %}
-  <script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modoOscuroActivo = document.body.classList.contains("modo-oscuro");
+
     Swal.fire({
-        title: "{% if 'success' in mensaje.tags %}¡Confirmado!{% else %}¡Error!{% endif %}",
-        text: "{{ mensaje }}",
-        icon: "{{ mensaje.tags }}",
-        timer: 3000,
-        showConfirmButton: true,
-        confirmButtonText: "Cerrar"
+      title: "{% if 'success' in mensaje.tags %}¡Confirmado!{% else %}¡Error!{% endif %}",
+      text: "{{ mensaje }}",
+      icon: "{{ mensaje.tags }}",
+      timer: 3000,
+      showConfirmButton: true,
+      confirmButtonText: "Cerrar",
+      background: modoOscuroActivo ? "#1e1e1e" : "#fff",
+      color: modoOscuroActivo ? "#fff" : "#000"
     });
-  </script>
+  });
+</script>
 {% endfor %}
 {% endif %}
+
 
 <style>
 .error {
