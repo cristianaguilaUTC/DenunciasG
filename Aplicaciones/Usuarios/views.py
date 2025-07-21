@@ -9,10 +9,12 @@ from django.http import JsonResponse
 import requests
 
 
-TELEGRAM_TOKEN="8147077991:AAGXusGcLppbGDEG-ADvke-F286peDiixWQ"
+
+
 
 
 def enviar_mensaje(chat_id, texto):
+    TELEGRAM_TOKEN="8147077991:AAGXusGcLppbGDEG-ADvke-F286peDiixWQ"
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={
         'chat_id': chat_id,
@@ -45,6 +47,36 @@ def webhook_telegram(request):
         return JsonResponse({"ok": True})
 
     return JsonResponse({"error": "Método no permitido"}, status=405)
+
+
+
+
+
+
+def recuperar_contrasena(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        apellido = request.POST.get("apellido")
+        telefono = request.POST.get("telefono")
+
+        try:
+            ciudadano = Ciudadano.objects.get(nombre=nombre, apellido=apellido, telefono=telefono)
+            if ciudadano.chat_id:
+                enviar_mensaje(ciudadano.chat_id, f"Tu contraseña es: {ciudadano.contrasena}")
+                return JsonResponse({"status": "success", "message": "Contraseña enviada por Telegram"})
+            else:
+                return JsonResponse({"status": "error", "message": "No tienes un chat_id vinculado con Telegram"})
+        except Ciudadano.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Datos no coinciden con ningún ciudadano"})
+
+    # Para autocomplete enviamos nombres y apellidos
+    nombres = list(Ciudadano.objects.values_list('nombre', flat=True).distinct())
+    apellidos = list(Ciudadano.objects.values_list('apellido', flat=True).distinct())
+
+    return render(request, "recuperar_contrasena.html", {
+        "nombres": nombres,
+        "apellidos": apellidos,
+    })
 
 #-------------------------------------
 
