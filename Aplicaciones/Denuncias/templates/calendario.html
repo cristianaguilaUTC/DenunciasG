@@ -1,20 +1,26 @@
 {% extends './plantilla2.html' %}
 {% block contenido %}
-<script src="
-https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js
-"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js"></script>
 
 <div id="calendar"></div>
+
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const calendarEl = document.getElementById('calendar');
+    var temas = JSON.parse('{{ temas_json|escapejs }}');
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const calendarEl = document.getElementById('calendar')
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-      })
-      calendar.render()
-    })
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      events: temas,  // Agrega los eventos cargados desde la vista
+      eventClick: function(info) {
+        // Redirigir a la URL definida en el evento
+        window.location.href = info.event.url;
+      }
+    });
 
-  </script>
+    calendar.render();
+  });
+</script>
+
 {% endblock %}

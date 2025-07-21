@@ -11,7 +11,8 @@ from django.db.models import Count
 from .models import Denuncia,Respuesta
 import calendar
 
-
+#calendario
+import json
 
 def reporte_completo_denuncias(request):
     # Día
@@ -171,9 +172,24 @@ def respuesta_lista(request):
 
 
 def calendario(request):
-    return render(request, 'calendario.html')
+    denuncias = Denuncia.objects.all()
+    temas_list = []
 
+    for denuncia in denuncias:
+        # Verificamos si existe una respuesta asociada
+        tiene_respuesta = Respuesta.objects.filter(denuncia=denuncia).exists()
 
+        # Definimos el color: verde si tiene respuesta, azul si no
+        color_evento = '#28a745' if tiene_respuesta else '#007bff'
 
+        temas_list.append({
+            'id': denuncia.id,
+            'title': f"{denuncia.tipo}",
+            'start': denuncia.fecha_creacion.isoformat(),
+            'color': color_evento,
+            'url': f"/responder_denuncia/{denuncia.id}/",  # redirección al hacer clic
+        })
 
-
+    return render(request, 'calendario.html', {
+        'temas_json': json.dumps(temas_list)
+    })
