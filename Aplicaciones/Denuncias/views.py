@@ -174,6 +174,8 @@ def respuesta_lista(request):
 
 
 
+def vista_calendario(request):
+    return render(request, 'calendario.html')
 
 @csrf_exempt
 def api_eventos_denuncias(request):
