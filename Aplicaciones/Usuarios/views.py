@@ -65,18 +65,19 @@ def recuperar_contrasena(request):
                 enviar_mensaje(ciudadano.chat_id, f"Tu contraseña es: {ciudadano.contrasena}")
                 return JsonResponse({"status": "success", "message": "Contraseña enviada por Telegram"})
             else:
-                return JsonResponse({"status": "error", "message": "No tienes un chat_id vinculado con Telegram"})
+                return JsonResponse({"status": "error", "message": "No tienes Telegram vinculado. Usa /vincular en el bot."})
         except Ciudadano.DoesNotExist:
-            return JsonResponse({"status": "error", "message": "Datos no coinciden con ningún ciudadano"})
+            return JsonResponse({"status": "error", "message": "Datos no coinciden con ningún ciudadano."})
 
-    # Para autocomplete enviamos nombres y apellidos
     nombres = list(Ciudadano.objects.values_list('nombre', flat=True).distinct())
     apellidos = list(Ciudadano.objects.values_list('apellido', flat=True).distinct())
 
-    return render(request, "recuperar_contrasena.html", {
-        "nombres": nombres,
-        "apellidos": apellidos,
-    })
+    context = {
+        "nombres_json": json.dumps(nombres),
+        "apellidos_json": json.dumps(apellidos),
+    }
+
+    return render(request, "recuperar_contrasena.html", context)
 
 #-------------------------------------
 

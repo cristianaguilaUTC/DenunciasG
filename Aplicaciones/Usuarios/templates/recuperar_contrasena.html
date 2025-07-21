@@ -1,83 +1,66 @@
+{% extends "plantilla.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <title>Recuperar Contraseña</title>
+{% block contenido %}
+<h2>Recuperar Contraseña vía Telegram</h2>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link
-      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
-      rel="stylesheet"
-    />
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<form id="recuperar-form" method="POST">
+  {% csrf_token %}
+  <label>Nombre:</label><br />
+  <input type="text" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
 
-    <style>
-      #loading {
-        display: none;
-        font-weight: bold;
-        font-size: 1.2em;
-        color: green;
-      }
-    </style>
-</head>
-<body>
-  <h2>Recuperar Contraseña vía Telegram</h2>
+  <label>Apellido:</label><br />
+  <input type="text" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
 
-  <form id="recuperar-form" method="POST">
-    {% csrf_token %}
-    <label>Nombre:</label><br />
-    <input type="text" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
+  <label>Teléfono:</label><br />
+  <input type="text" id="telefono" name="telefono" required /><br /><br />
 
-    <label>Apellido:</label><br />
-    <input type="text" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
+  <button type="submit">Enviar contraseña</button>
+</form>
 
-    <label>Teléfono:</label><br />
-    <input type="text" id="telefono" name="telefono" required /><br /><br />
+<div id="loading" style="display:none; font-weight:bold; color:green;">Enviando contraseña... Por favor espera...</div>
+<div id="mensaje"></div>
 
-    <button type="submit">Enviar contraseña</button>
-  </form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
-  <div id="loading">Enviando contraseña... Por favor espera...</div>
-  <div id="mensaje"></div>
+<script>
+  $(function () {
+    var nombres = JSON.parse(document.getElementById('nombres_data').textContent);
+    var apellidos = JSON.parse(document.getElementById('apellidos_data').textContent);
 
-  <script>
-    $(function () {
-      var nombres = {{ nombres|safe }};
-      var apellidos = {{ apellidos|safe }};
+    $("#nombre").autocomplete({ source: nombres });
+    $("#apellido").autocomplete({ source: apellidos });
 
-      $("#nombre").autocomplete({ source: nombres });
-      $("#apellido").autocomplete({ source: apellidos });
+    $("#recuperar-form").submit(function (e) {
+      e.preventDefault();
+      $("#mensaje").empty();
+      $("#loading").show();
 
-      $("#recuperar-form").submit(function (e) {
-        e.preventDefault();
-
-        $("#mensaje").empty();
-        $("#loading").show();
-
-        setTimeout(() => {
-          $.ajax({
-            type: "POST",
-            url: "{% url 'recuperar_contrasena' %}",
-            data: $(this).serialize(),
-            success: function (response) {
-              $("#loading").hide();
-              if (response.status === "success") {
-                $("#mensaje").css("color", "green").text(response.message);
-              } else {
-                $("#mensaje").css("color", "red").text(response.message);
-              }
-            },
-            error: function () {
-              $("#loading").hide();
-              $("#mensaje")
-                .css("color", "red")
-                .text("Error del servidor. Intenta más tarde.");
-            },
-          });
-        }, 10000); // 10 segundos simulados
-      });
+      setTimeout(() => {
+        $.ajax({
+          type: "POST",
+          url: "{% url 'recuperar_contrasena' %}",
+          data: $(this).serialize(),
+          success: function (response) {
+            $("#loading").hide();
+            if (response.status === "success") {
+              $("#mensaje").css("color", "green").text(response.message);
+            } else {
+              $("#mensaje").css("color", "red").text(response.message);
+            }
+          },
+          error: function () {
+            $("#loading").hide();
+            $("#mensaje").css("color", "red").text("Error del servidor. Intenta más tarde.");
+          },
+        });
+      }, 10000);
     });
-  </script>
-</body>
-</html>
+  });
+</script>
+
+{{ nombres|json_script:"nombres_data" }}
+{{ apellidos|json_script:"apellidos_data" }}
+{% endblock %}
+
