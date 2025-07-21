@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -6,7 +5,6 @@
     <meta charset="UTF-8" />
     <title>Recuperar Contraseña</title>
 
-    <!-- jQuery y jQuery UI -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link
       href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
@@ -29,30 +27,13 @@
   <form id="recuperar-form" method="POST">
     {% csrf_token %}
     <label>Nombre:</label><br />
-    <input
-      type="text"
-      id="nombre"
-      name="nombre"
-      required
-      autocomplete="off"
-    /><br /><br />
+    <input type="text" id="nombre" name="nombre" required autocomplete="off" /><br /><br />
 
     <label>Apellido:</label><br />
-    <input
-      type="text"
-      id="apellido"
-      name="apellido"
-      required
-      autocomplete="off"
-    /><br /><br />
+    <input type="text" id="apellido" name="apellido" required autocomplete="off" /><br /><br />
 
     <label>Teléfono:</label><br />
-    <input
-      type="text"
-      id="telefono"
-      name="telefono"
-      required
-    /><br /><br />
+    <input type="text" id="telefono" name="telefono" required /><br /><br />
 
     <button type="submit">Enviar contraseña</button>
   </form>
@@ -62,7 +43,6 @@
 
   <script>
     $(function () {
-      // Autocomplete con datos del backend
       var nombres = {{ nombres|safe }};
       var apellidos = {{ apellidos|safe }};
 
@@ -75,9 +55,7 @@
         $("#mensaje").empty();
         $("#loading").show();
 
-        // Simular loading de 10 segundos
         setTimeout(() => {
-          // Enviar datos por AJAX
           $.ajax({
             type: "POST",
             url: "{% url 'recuperar_contrasena' %}",
@@ -97,7 +75,7 @@
                 .text("Error del servidor. Intenta más tarde.");
             },
           });
-        }, 10000); // 10 segundos de espera simulada
+        }, 10000); // 10 segundos simulados
       });
     });
   </script>
