@@ -3,3 +3,4 @@ psycopg2-binary
 python-decouple
 gunicorn
 whitenoise>=6.6.0
+requests
