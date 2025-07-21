@@ -177,6 +177,7 @@ def respuesta_lista(request):
 def calendario(request):
     return render(request, 'calendario.html')
 
+
 @csrf_exempt
 def eventos_denuncias(request):
     eventos = []
