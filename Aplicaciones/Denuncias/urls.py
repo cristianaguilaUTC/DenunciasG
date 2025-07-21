@@ -13,10 +13,7 @@ urlpatterns = [
     path('responder_denuncia/<int:denuncia_id>/', views.responder_denuncia, name='responder_denuncia'),
     path('reporte_denuncias_completo/', views.reporte_completo_denuncias, name='reporte_completo_denuncias'),
     path('respuesta_lista/', views.respuesta_lista, name='respuesta_lista'),
-    # RUTA PARA VER EL CALENDARIO
-path('eventos_denuncias/', views.vista_calendario, name='vista_calendario'),
-
-# RUTA PARA EL JSON (FullCalendar la usa internamente)
-path('api/eventos_denuncias/', views.api_eventos_denuncias, name='api_eventos_denuncias'),
+    path('calendario/', views.calendario, name='calendario'),
+    path('eventos_denuncias/', views.eventos_denuncias, name='eventos_denuncias'),
 
 ]

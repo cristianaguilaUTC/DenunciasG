@@ -174,11 +174,11 @@ def respuesta_lista(request):
 
 
 
-def vista_calendario(request):
+def calendario(request):
     return render(request, 'calendario.html')
 
 @csrf_exempt
-def api_eventos_denuncias(request):
+def eventos_denuncias(request):
     eventos = []
     for denuncia in Denuncia.objects.all():
         eventos.append({
