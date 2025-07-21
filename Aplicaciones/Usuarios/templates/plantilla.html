@@ -255,21 +255,29 @@ body.modo-oscuro .swal2-cancel {
 }
 
 /* Menú responsive modo oscuro */
-body.modo-oscuro .navmenu.active {
-  background-color: #1e1e1e !important;
+@media (max-width: 1199px) {
+  body.modo-oscuro .navmenu ul {
+    background-color: #1f1f1f !important; /* Fondo oscuro */
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05); /* Sombra suave clara */
+  }
+
+  body.modo-oscuro .navmenu ul a {
+    color: #fff !important; /* Letras blancas */
+  }
+
+  body.modo-oscuro .navmenu ul a:hover {
+    background-color: #2a2a2a !important; /* Hover más claro */
+  }
+
+  body.modo-oscuro .dropdown-content {
+    background-color: #2b2b2b !important;
+  }
+
+  body.modo-oscuro .dropdown-content a {
+    color: #fff !important;
+  }
 }
 
-body.modo-oscuro .navmenu.active a {
-  color: #ffffff !important;
-}
-
-body.modo-oscuro .navmenu.active .dropdown-content {
-  background-color: #2c2c2c !important;
-}
-
-body.modo-oscuro .navmenu.active .dropdown-content a {
-  color: #ffffff !important;
-}
 
 
     </style>
@@ -313,7 +321,7 @@ body.modo-oscuro .navmenu.active .dropdown-content a {
               🌙 Modo Oscuro
             </button>  
           </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list">fx</i>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
       </div>
     </div>
