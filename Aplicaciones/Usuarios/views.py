@@ -12,18 +12,18 @@ import requests
 
 
 
-
-def enviar_mensaje(chat_id, texto):
+def enviar_mensaje( texto):
     TELEGRAM_TOKEN="8147077991:AAGXusGcLppbGDEG-ADvke-F286peDiixWQ"
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={
-        'chat_id': chat_id,
+        'chat_id': "5496107398",
         'text': texto
     })
 
 @csrf_exempt
 def webhook_telegram(request):
     if request.method == "POST":
+        print("✅ Llego algo del bot")
         data = json.loads(request.body)
         mensaje = data.get("message", {})
         chat = mensaje.get("chat", {})
