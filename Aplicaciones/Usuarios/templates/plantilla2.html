@@ -29,6 +29,8 @@
 
   <link href="{% static 'plantilla/MediCio/assets/css/main.css' %}" rel="stylesheet">
 
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.js"></script>
 
 
    <!--importado flife imput-->
@@ -89,7 +91,7 @@
                     <li><a href="/reporte_denuncias_completo/">Reporte de Denuncias</a></li>
                     <li><a href="/menu/">Cerrar Sesión</a></li>
               {% else %}
-                    <li><a href="/panel_funcionario/">Gestión Denuncias</a></li>
+                    <li><a href="/eventos_denuncias/">Gestión Denuncias</a></li>
                     <li class="dropdown">
                       <a href="#" class="">Configuración</a>
                       <div class="dropdown-content">

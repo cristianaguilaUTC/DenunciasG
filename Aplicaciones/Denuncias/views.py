@@ -5,10 +5,17 @@ from .models import Denuncia, Respuesta
 from Aplicaciones.Usuarios.models import Ciudadano, Funcionario
 from django.conf import settings
 
+#graficas
 from django.db.models.functions import TruncDate,TruncMonth
 from django.db.models import Count
 from .models import Denuncia,Respuesta
 import calendar
+
+#calendario
+from django.http import JsonResponse
+from .models import Denuncia
+from django.views.decorators.csrf import csrf_exempt
+
 
 def reporte_completo_denuncias(request):
     # Día
@@ -167,6 +174,17 @@ def respuesta_lista(request):
 
 
 
+
+@csrf_exempt
+def api_eventos_denuncias(request):
+    eventos = []
+    for denuncia in Denuncia.objects.all():
+        eventos.append({
+            "title": f"{denuncia.tipo} - {denuncia.ciudadano.nombre}",
+            "start": denuncia.fecha_creacion.strftime("%Y-%m-%d"),
+            "url": f"/editar_denuncia/{denuncia.id}"  # opcional: para hacer clic e ir al detalle
+        })
+    return JsonResponse(eventos, safe=False)
 
 
 
